@@ -1,0 +1,41 @@
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class Lab3 {
+
+  public static void main(String[] args) {
+    try {
+      FileOutputStream file = new FileOutputStream("data.dat");
+      try (DataOutputStream output = new DataOutputStream(file)) {
+        output.writeUTF("Jim Henry");
+        output.writeInt(30);
+        output.writeDouble(65.5);
+        output.writeChar('A');
+      }
+    } catch (FileNotFoundException ex) {
+      Logger.getLogger(Lab3.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (IOException ex) {
+      Logger.getLogger(Lab3.class.getName()).log(Level.SEVERE, null, ex);
+    }
+
+    try {
+      FileInputStream file = new FileInputStream("data.dat");
+      try (DataInputStream input = new DataInputStream(file)) {
+        System.out.println(input.readUTF());
+        System.out.println(input.readInt());
+        System.out.println(input.readDouble());
+        System.out.println(input.readChar());
+      }
+    } catch (FileNotFoundException ex) {
+      Logger.getLogger(Lab3.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (IOException ex) {
+      Logger.getLogger(Lab3.class.getName()).log(Level.SEVERE, null, ex);
+    }
+  }
+}
